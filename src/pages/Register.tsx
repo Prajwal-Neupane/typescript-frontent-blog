@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
+  const [passwordView1, setPasswordView1] = useState<boolean>(false);
+  const [passwordView2, setPasswordView2] = useState<boolean>(false);
   return (
     <div className="max-w-[800px] mx-auto bg-primary h-full py-8 flex flex-col gap-5 items-center justify-center">
       <div className="flex flex-col items-center gap-2">
@@ -48,12 +51,24 @@ const Register = () => {
             <div className="flex items-center pr-5 border-b-2 border-gray-300 ">
               <input
                 className="w-full py-2 mr-5 text-xl outline-none "
-                type="password"
+                type={`${passwordView1 ? "text" : "password"}`}
                 name="password1"
                 placeholder="********"
                 id=""
               />
-              <FaEye size={20} />
+              {passwordView1 ? (
+                <FaEyeSlash
+                  className="hover:cursor-pointer"
+                  onClick={() => setPasswordView1(!passwordView1)}
+                  size={20}
+                />
+              ) : (
+                <FaEye
+                  className="hover:cursor-pointer"
+                  onClick={() => setPasswordView1(!passwordView1)}
+                  size={20}
+                />
+              )}
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -61,12 +76,24 @@ const Register = () => {
             <div className="flex items-center pr-5 border-b-2 border-gray-300 ">
               <input
                 className="w-full py-2 mr-5 text-xl outline-none "
-                type="password"
+                type={`${passwordView2 ? "text" : "password"}`}
                 name="password2"
                 placeholder="********"
                 id=""
               />
-              <FaEye size={20} />
+              {passwordView2 ? (
+                <FaEyeSlash
+                  className="hover:cursor-pointer"
+                  onClick={() => setPasswordView2(!passwordView2)}
+                  size={20}
+                />
+              ) : (
+                <FaEye
+                  className="hover:cursor-pointer"
+                  onClick={() => setPasswordView2(!passwordView2)}
+                  size={20}
+                />
+              )}
             </div>
           </div>
           <div className="flex items-center gap-4 mt-5 text-xl">
