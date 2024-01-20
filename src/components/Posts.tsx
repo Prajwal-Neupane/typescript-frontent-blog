@@ -3,7 +3,7 @@ import Post from "./Post";
 
 const Posts = () => {
   return (
-    <div className="flex-1">
+    <div className="flex-col flex-1 h-screen overflow-scroll">
       <Post />
       <Post />
       <Post />
