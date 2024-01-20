@@ -5,8 +5,10 @@ import { CiSearch } from "react-icons/ci";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [showSearchBar, setShowSearchBar] = useState(false);
   return (
     <div className="mx-auto max-w-[1550px] py-5 px-5 flex gap-5 justify-between border-b-gray-300 border-b-2 items-center">
       <div className="flex items-center gap-3">
@@ -31,7 +33,6 @@ const Navbar = () => {
           className="px-1 border-2 border-gray-400 rounded-full"
         />
         <div className="flex items-center gap-4">
-          <p className="text-xl font-semibold overflow-clip ">{"Prajwal"}</p>
           <CiUser
             size={30}
             className="px-1 border-2 border-gray-400 rounded-full"
