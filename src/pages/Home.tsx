@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="flex mx-auto max-w-[1400px] min-h-screen ">
+      <div className="flex mx-auto max-w-[1550px] min-h-screen ">
         <Sidebar />
 
         <Posts />
