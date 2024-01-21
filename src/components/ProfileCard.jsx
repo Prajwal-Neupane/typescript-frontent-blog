@@ -1,33 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   FaFacebook,
   FaLinkedin,
   FaPinterest,
   FaTwitter,
 } from "react-icons/fa6";
+import axios from "axios";
 
 const ProfileCard = () => {
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  const [data, setData] = useState();
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const response = await axios.get("http://localhost:3001/api/user/me", {
+        headers: {
+          Authorization: `Bearer ${accessToken && accessToken}`,
+        },
+      });
+      setData(response.data);
+    };
+    fetchUserData();
+  });
   return (
     <div className="relative container h-fit w-[100%] xl:w-[80%] pb-5 mt-16 border-gray-300 border-2 rounded-xl items-center flex flex-col gap-4 shadow-xl shadow-red-300">
       <img
         className="relative object-cover rounded-full -top-10 w-28 h-28"
-        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={data.profilePic}
         alt="profile"
       />
       <h1 className="relative text-3xl font-semibold text-center -top-10">
-        Prajwal Neupane
+        {data.username}
       </h1>
       <p className="relative text-xl text-center -top-12 ">A web developer</p>
       <hr className="relative w-full border-2 border-gray-300 -top-10" />
       <div className="relative flex gap-5 -top-10 ">
         <div className="flex flex-col gap-2 ">
           <h1 className="text-[1.3rem] font-semibold">Followers</h1>
-          <p className="text-xl text-center">12</p>
+          <p className="text-xl text-center">{data.followers.length}</p>
         </div>
         <div className="border-l-2 border-black"></div>
         <div className="flex flex-col gap-3">
           <h1 className="text-[1.3rem] font-semibold">Following</h1>
-          <p className="text-xl text-center">12</p>
+          <p className="text-xl text-center">{data.following.length}</p>
         </div>
       </div>
       <div className="relative flex gap-6 -top-6">

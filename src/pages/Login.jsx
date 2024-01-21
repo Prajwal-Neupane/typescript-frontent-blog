@@ -25,6 +25,7 @@ const Login = () => {
   const handleSubmit = async () => {
     if (!data.email || !data.password) {
       toast.error("Fields are required");
+      return;
     }
     try {
       const response = await axios.post(
