@@ -4,8 +4,8 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
-  const [passwordView1, setPasswordView1] = useState<boolean>(false);
-  const [passwordView2, setPasswordView2] = useState<boolean>(false);
+  const [passwordView1, setPasswordView1] = useState(false);
+  const [passwordView2, setPasswordView2] = useState(false);
   return (
     <div className="max-w-[800px] mx-auto bg-primary h-full py-8 flex flex-col gap-5 items-center justify-center">
       <div className="flex flex-col items-center gap-2">

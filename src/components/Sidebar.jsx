@@ -7,7 +7,7 @@ import { BsFillSave2Fill } from "react-icons/bs";
 
 const Sidebar = () => {
   return (
-    <div className=" md:px-5 w-[15%] md:w-[20%] pt-5 border-r-2 border-gray-200 ">
+    <div className=" md:px-5 w-[15%] md:w-[15%] pt-5 border-r-2 border-gray-200 ">
       <div className="flex flex-col gap-4 pb-4 border-b-2 border-gray-200">
         <div className="flex items-center gap-4 px-4 py-4 transition-colors duration-300 rounded-xl hover:bg-red-300 hover:cursor-pointer">
           <AiFillHome className="size-6 md:size-6" color="grey" />

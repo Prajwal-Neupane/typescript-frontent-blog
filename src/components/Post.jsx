@@ -37,7 +37,7 @@ const Post = () => {
 
       {/* Div for Texts */}
       <div>
-        <h1 className="text-[1.2rem] font-['Roboto'] text-justify tracking-wide">
+        <h1 className="text-[1.2rem] font-['Roboto'] text-justify leading-6">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
           debitis dolore ut, vitae nihil pariatur aliquam illo iusto animi sed.
           Magnam veritatis eos cum vero dolores facere et, possimus dolorem
@@ -58,12 +58,12 @@ const Post = () => {
       <div>
         <img
           src="https://plus.unsplash.com/premium_photo-1672109350982-d29f8619e066?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          className="object-cover w-full rounded-md h-fit"
+          className="object-cover w-full h-[500px] rounded-md"
           alt=""
         />
       </div>
       {/* Div for like, comment and share icons */}
-      <div className="flex justify-between ">
+      <div className="flex justify-between mt-3 ">
         {/* Div for like and comment */}
         <div className="flex gap-10">
           {/* Div for like */}
