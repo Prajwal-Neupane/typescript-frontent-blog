@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./services/ProtectedRoute";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>

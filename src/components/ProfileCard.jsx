@@ -7,6 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa6";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ProfileCard = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
@@ -63,9 +64,12 @@ const ProfileCard = () => {
           size={20}
         />
       </div>
-      <button className="relative px-3 py-3 font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:bg-secondary">
+      <Link
+        to={"/profile"}
+        className="relative px-3 py-3 font-semibold text-white transition-all duration-300 rounded-full bg-primary hover:bg-secondary"
+      >
         View Profile
-      </button>
+      </Link>
     </div>
   );
 };

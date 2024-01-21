@@ -5,19 +5,15 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { GoCommentDiscussion } from "react-icons/go";
 import { CiLocationArrow1 } from "react-icons/ci";
+import { Author } from "./Author";
 
-const Post = () => {
+const Post = ({ posts }) => {
   const [like, setLike] = useState(false);
   return (
     <div className="flex flex-col gap-3 px-5 pt-5 pb-4 border-b-2 border-gray-200 md:px-5">
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
-          <img
-            src="https://cdn-icons-png.flaticon.com/256/4333/4333609.png"
-            className="size-12"
-            alt=""
-          />
-          <div>
+          {/* <div>
             <h1 className="text-xl font-semibold">Prajwal Neupane</h1>
             <div className="flex items-center gap-3 mt-1">
               <p className="text-[12px] text-gray-600 font-semibold ">
@@ -25,10 +21,11 @@ const Post = () => {
               </p>
               <GoDotFill size={8} />
               <p className="text-[12px] text-gray-600 font-semibold">
-                1 Hours Ago
+                {posts.createdAt}
               </p>
             </div>
-          </div>
+          </div> */}
+          <Author createdAt={posts.createdAt} author={posts.author} />
         </div>
         <div>
           <BsThreeDotsVertical size={20} />
@@ -38,19 +35,21 @@ const Post = () => {
       {/* Div for Texts */}
       <div>
         <h1 className="text-[1.2rem] font-['Roboto'] text-justify leading-6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
-          debitis dolore ut, vitae nihil pariatur aliquam illo iusto animi sed.
-          Magnam veritatis eos cum vero dolores facere et, possimus dolorem
-          ratione exercitationem blanditiis iure voluptatem aut eligendi nobis
-          maxime fugit beatae dignissimos molestiae tempore excepturi similique
-          aliquam ipsam dolor! Perspiciatis.
+          {posts.content}
         </h1>
       </div>
 
       {/* Div for Hashtags */}
       <div className="flex gap-2 mt-2">
-        <p className="text-[1.2rem] font-semibold text-blue-900 ">#travel</p>
-        <p className="text-[1.2rem] font-semibold text-blue-900 ">#fun</p>
+        {posts.hashtags &&
+          posts.hashtags.map((hashtag, index) => {
+            <p
+              key={index}
+              className="text-[1.2rem] font-semibold text-blue-900 "
+            >
+              #{hashtag}
+            </p>;
+          })}
       </div>
 
       {/* Div for Image */}
@@ -63,7 +62,7 @@ const Post = () => {
         />
       </div>
       {/* Div for like, comment and share icons */}
-      <div className="flex justify-between mt-3 ">
+      <div className="flex justify-between pb-6 mt-3 ">
         {/* Div for like and comment */}
         <div className="flex gap-10">
           {/* Div for like */}
@@ -74,15 +73,15 @@ const Post = () => {
               <FaRegHeart size={20} />
             )}
             {like ? (
-              <p className="font-semibold text-primary">1.8 K</p>
+              <p className="font-semibold text-primary">{posts.likes.length}</p>
             ) : (
-              <p className="font-semibold">1.8 K</p>
+              <p className="font-semibold">{posts.likes.length}</p>
             )}
           </div>
           {/* Div for comment */}
           <div className="flex gap-4">
             <GoCommentDiscussion size={20} />
-            <p className="font-semibold ">1.1 K</p>
+            <p className="font-semibold ">{posts.comments.length}</p>
           </div>
         </div>
         {/* div for share */}
