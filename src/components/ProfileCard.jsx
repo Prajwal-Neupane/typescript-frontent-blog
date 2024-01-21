@@ -21,28 +21,28 @@ const ProfileCard = () => {
       setData(response.data);
     };
     fetchUserData();
-  });
+  }, []);
   return (
     <div className="relative container h-fit w-[100%] xl:w-[80%] pb-5 mt-16 border-gray-300 border-2 rounded-xl items-center flex flex-col gap-4 shadow-xl shadow-red-300">
       <img
         className="relative object-cover rounded-full -top-10 w-28 h-28"
-        src={data.profilePic}
+        src={data && data.profilePic}
         alt="profile"
       />
       <h1 className="relative text-3xl font-semibold text-center -top-10">
-        {data.username}
+        {data && data.username}
       </h1>
       <p className="relative text-xl text-center -top-12 ">A web developer</p>
       <hr className="relative w-full border-2 border-gray-300 -top-10" />
       <div className="relative flex gap-5 -top-10 ">
         <div className="flex flex-col gap-2 ">
           <h1 className="text-[1.3rem] font-semibold">Followers</h1>
-          <p className="text-xl text-center">{data.followers.length}</p>
+          <p className="text-xl text-center">{data && data.followers.length}</p>
         </div>
         <div className="border-l-2 border-black"></div>
         <div className="flex flex-col gap-3">
           <h1 className="text-[1.3rem] font-semibold">Following</h1>
-          <p className="text-xl text-center">{data.following.length}</p>
+          <p className="text-xl text-center">{data && data.following.length}</p>
         </div>
       </div>
       <div className="relative flex gap-6 -top-6">
