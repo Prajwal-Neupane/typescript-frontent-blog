@@ -17,7 +17,7 @@ export const Author = ({ author, createdAt }) => {
           },
         }
       );
-      console.log(response.data);
+
       setUser(response.data);
     };
     fetchUser();

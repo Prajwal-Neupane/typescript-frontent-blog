@@ -9,6 +9,13 @@ import { Author } from "./Author";
 
 const Post = ({ posts }) => {
   const [like, setLike] = useState(false);
+  const dateObject = new Date(posts.createdAt);
+  const options = {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  };
+  const formattedDate = dateObject.toLocaleString("en-US", options);
   return (
     <div className="flex flex-col gap-3 px-5 pt-5 pb-4 border-b-2 border-gray-200 md:px-5">
       <div className="flex justify-between">
@@ -25,7 +32,7 @@ const Post = ({ posts }) => {
               </p>
             </div>
           </div> */}
-          <Author createdAt={posts.createdAt} author={posts.author} />
+          <Author createdAt={formattedDate} author={posts.author} />
         </div>
         <div>
           <BsThreeDotsVertical size={20} />
