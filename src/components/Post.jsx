@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { GoDotFill } from "react-icons/go";
+
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 import { GoCommentDiscussion } from "react-icons/go";
@@ -49,24 +49,26 @@ const Post = ({ posts }) => {
       {/* Div for Hashtags */}
       <div className="flex gap-2 mt-2">
         {posts.hashtags &&
-          posts.hashtags.map((hashtag, index) => {
+          posts.hashtags.map((hashtag, index) => (
             <p
               key={index}
               className="text-[1.2rem] font-semibold text-blue-900 "
             >
               #{hashtag}
-            </p>;
-          })}
+            </p>
+          ))}
       </div>
 
       {/* Div for Image */}
 
       <div>
-        <img
-          src="https://plus.unsplash.com/premium_photo-1672109350982-d29f8619e066?q=80&w=1933&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          className="object-cover w-full h-[500px] rounded-md"
-          alt=""
-        />
+        {posts.thumbnail && (
+          <img
+            src={posts.thumbnail}
+            className="object-cover w-full h-[500px] rounded-md"
+            alt=""
+          />
+        )}
       </div>
       {/* Div for like, comment and share icons */}
       <div className="flex justify-between pb-6 mt-3 ">

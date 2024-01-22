@@ -22,7 +22,7 @@ const ProfileCard = () => {
       setData(response.data);
     };
     fetchUserData();
-  }, []);
+  }, [accessToken]);
   return (
     <div className="relative container h-fit w-[100%] xl:w-[80%] pb-5 mt-16 border-gray-300 border-2 rounded-xl items-center flex flex-col gap-4 shadow-xl shadow-red-300">
       <img

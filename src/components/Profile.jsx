@@ -19,7 +19,7 @@ const Profile = () => {
       setData(response.data);
     };
     fetchUserData();
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     const fetchAllUserBlogs = async () => {
@@ -29,7 +29,7 @@ const Profile = () => {
       setPosts(response.data);
     };
     fetchAllUserBlogs();
-  }, []);
+  }, [accessToken]);
   console.log(posts);
 
   return (
@@ -81,10 +81,9 @@ const Profile = () => {
                   posts.map((post) => <Post key={post._id} posts={post} />)
                 ) : (
                   <div className="mt-8">
-                    {" "}
                     <h1 className="text-xl font-semibold text-center">
                       No Posts Available
-                    </h1>{" "}
+                    </h1>
                   </div>
                 )}
               </div>

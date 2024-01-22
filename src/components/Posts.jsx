@@ -13,7 +13,7 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="flex-col flex-1 h-screen overflow-scroll">
+    <div className="flex-col flex-1 h-screen overflow-scroll ">
       {posts && posts.map((post) => <Post key={post._id} posts={post} />)}
     </div>
   );

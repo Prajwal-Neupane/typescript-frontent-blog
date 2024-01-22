@@ -21,7 +21,7 @@ export const Author = ({ author, createdAt }) => {
       setUser(response.data);
     };
     fetchUser();
-  }, []);
+  }, [accessToken, author]);
   return (
     <>
       <img

@@ -12,7 +12,6 @@ import { logOut } from "../services/authSlice";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const [showSearchBar, setShowSearchBar] = useState(false);
   const dispatch = useDispatch();
   const popUpRef = useRef(null);
   const [popUp, setPopUp] = useState(false);
@@ -34,12 +33,12 @@ const Navbar = () => {
   };
   return (
     <div className="mx-auto max-w-[1550px] py-5 px-5 flex gap-5 justify-between border-b-gray-300 border-b-2 items-center">
-      <div className="flex items-center gap-3">
+      <Link to={"/"} className="flex items-center gap-3">
         <FaCircleDot size={40} color="#C70039" />
         <h1 className="xl:text-5xl text-4xl font-semibold text-[#Fe0000]">
           Dot.X
         </h1>
-      </div>
+      </Link>
       <div className="w-[50%] flex px-4 py-3 items-center gap-4 border-2 border-gray-200 justify-between rounded-full">
         <CiSearch size={25} color="" />
         <input
