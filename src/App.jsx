@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import PrivateRoute from "./services/ProtectedRoute";
 import Profile from "./components/Profile";
 import { CreatePost } from "./pages/CreatePost";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/user/:id" element={<UserProfile />} />
         </Route>
       </Routes>
     </div>

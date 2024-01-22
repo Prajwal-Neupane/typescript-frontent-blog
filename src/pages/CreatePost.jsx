@@ -34,6 +34,10 @@ export const CreatePost = () => {
     sethashtags(updatedLinks);
   };
   const handleSubmit = async () => {
+    if (!content) {
+      toast.error("Content is required");
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:3001/api/addblog",

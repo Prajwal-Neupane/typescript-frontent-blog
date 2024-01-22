@@ -30,7 +30,6 @@ const Profile = () => {
     };
     fetchAllUserBlogs();
   }, [accessToken]);
-  console.log(posts);
 
   return (
     <div>
