@@ -19,6 +19,7 @@ const Sidebar = () => {
     };
     fetchAllUsers();
   }, []);
+  console.log(users);
 
   return (
     <div className=" md:px-5 w-[15%] md:w-[15%] pt-5 border-r-2 border-gray-200 ">
@@ -52,7 +53,7 @@ const Sidebar = () => {
         {users &&
           users.map((user) => {
             return (
-              <div className="flex gap-3 ">
+              <div key={user._id} className="flex gap-3 ">
                 <img
                   src={user.profilePic}
                   alt=""
