@@ -97,10 +97,6 @@ const UserProfile = () => {
                   {user.email}
                 </p>
                 <div className="flex gap-16 ">
-                  <p className="md:text-xl text-[1.1rem] font-semibold">
-                    <span className="font-bold ">{user && user.length}</span>
-                    &nbsp; posts
-                  </p>
                   <p className="md:text-xl text-[1.1rem] font-semibold ">
                     <span className="font-bold">
                       {user && user.followers.length}

@@ -11,6 +11,7 @@ import PrivateRoute from "./services/ProtectedRoute";
 import Profile from "./components/Profile";
 import { CreatePost } from "./pages/CreatePost";
 import UserProfile from "./pages/UserProfile";
+import UpdatePost from "./pages/UpdatePost";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/create" element={<CreatePost />} />
           <Route path="/user/:id" element={<UserProfile />} />
+          <Route path="/edit/:id" element={<UpdatePost />} />
         </Route>
       </Routes>
     </div>

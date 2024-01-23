@@ -19,7 +19,6 @@ const Sidebar = () => {
     };
     fetchAllUsers();
   }, []);
-  console.log(users);
 
   return (
     <div className=" md:px-5 w-[15%] md:w-[15%] pt-5 border-r-2 border-gray-200 ">
@@ -53,7 +52,7 @@ const Sidebar = () => {
         {users &&
           users.map((user) => {
             return (
-              <div key={user._id} className="flex gap-3 ">
+              <div key={user._id} className="flex gap-3 px-2 ">
                 <img
                   src={user.profilePic}
                   alt=""
@@ -61,7 +60,7 @@ const Sidebar = () => {
                 />
                 <Link
                   to={`/user/${user._id}`}
-                  className="text-xl font-semibold text-gray-700 hover:cursor-pointer hover:underline"
+                  className="hidden text-xl font-semibold text-gray-700 md:flex hover:cursor-pointer hover:underline"
                 >
                   {user.fullName}
                 </Link>
