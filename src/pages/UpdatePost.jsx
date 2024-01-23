@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -11,12 +11,23 @@ import { MdDelete } from "react-icons/md";
 
 const UpdatePost = () => {
   const { id } = useParams();
-  console.log(id);
+
   const navigate = useNavigate();
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [hashtagInput, setHashtagInput] = useState();
   const [hashtags, sethashtags] = useState([]);
   const [content, setContent] = useState();
+
+  useEffect(() => {
+    const fetchUpdatePost = async () => {
+      const response = await axios.get(`http://localhost:3001/api/blog/${id}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      setContent(response.data.content);
+      sethashtags(response.data.hashtags);
+    };
+    fetchUpdatePost();
+  }, []);
 
   const handleLink = (e) => {
     e.preventDefault();
@@ -39,14 +50,15 @@ const UpdatePost = () => {
       toast.error("Content is required");
       return;
     }
+    console.log({ content, hashtags });
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/addblog",
+      await axios.put(
+        `http://localhost:3001/api/blog/${id}`,
         { content, hashtags },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
       navigate("/");
-      toast.success("Post created successfully");
+      toast.success("Post updated successfully");
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +75,7 @@ const UpdatePost = () => {
             placeholder="Enter here something..."
             rows={12}
             cols={30}
+            value={content}
             onChange={(e) => setContent(e.target.value)}
           />
           <div className="flex flex-col gap-0 mt-5">
