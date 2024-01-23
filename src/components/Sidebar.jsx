@@ -6,6 +6,7 @@ import { FaVideo } from "react-icons/fa6";
 import { BsFillSave2Fill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { IoIosAddCircle } from "react-icons/io";
 
 const Sidebar = () => {
   const [users, setUsers] = useState();
@@ -34,9 +35,10 @@ const Sidebar = () => {
           <FaMessage className="size-6 md:size-6" color="grey" />
           <p className="hidden text-xl text-gray-600 md:block">Message</p>
         </div>
-        <div className="flex items-center gap-4 px-4 py-4 transition-colors duration-300 rounded-xl hover:bg-red-300 hover:cursor-pointer">
-          <MdExplore className="size-6 md:size-6" color="grey" />
-          <p className="hidden text-xl text-gray-600 md:block">Explore</p>
+        <div className="transition-colors duration-300 rounded-xl hover:cursor-pointer">
+          <Link to={"/create"} className=" bottom-0 right-[0rem]">
+            <IoIosAddCircle size={60} className="rounded-full bg-primary" />
+          </Link>
         </div>
         <div className="flex items-center gap-4 px-4 py-4 transition-colors duration-300 rounded-xl hover:bg-red-300 hover:cursor-pointer">
           <FaVideo className="size-6 md:size-6" color="grey" />

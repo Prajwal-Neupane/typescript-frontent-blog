@@ -8,16 +8,13 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="relative">
       <Navbar />
       <div className="flex mx-auto max-w-[1550px]  ">
         <Sidebar />
 
         <Posts />
         <Rightbar />
-        <Link to={"/create"} className="absolute bottom-10 right-[30rem]">
-          <IoIosAddCircle size={60} className="rounded-full bg-primary" />
-        </Link>
       </div>
     </div>
   );

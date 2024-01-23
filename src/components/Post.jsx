@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
+import axios from "axios";
 
-const Post = ({ posts }) => {
+const Post = ({ post }) => {
+  const [posts, setPosts] = useState(post);
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [like, setLike] = useState(false);
   const { decodedToken, isExpired } = useJwt(accessToken);
@@ -30,6 +32,11 @@ const Post = ({ posts }) => {
     }
     return () => document.removeEventListener("click", handleClickOutside);
   }, [popUp]);
+  useEffect(() => {
+    if (decodedToken) {
+      setLike(posts.likes.includes(decodedToken.id));
+    }
+  }, [decodedToken, posts.likes]);
   const dateObject = new Date(posts.createdAt);
   const options = {
     month: "short",
@@ -53,6 +60,32 @@ const Post = ({ posts }) => {
   const handleDelete = (id) => {
     console.log(id);
     toast.dismiss();
+  };
+  const handleLike = async () => {
+    setLike(() => true);
+    await axios.put(
+      `http://localhost:3001/api/like/${posts._id}`,
+      {},
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    const updatedPost = await axios.get(
+      `http://localhost:3001/api/blog/${posts._id}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    setPosts(updatedPost.data);
+  };
+  const handleDisLike = async () => {
+    setLike(() => false);
+    await axios.put(
+      `http://localhost:3001/api/like/${posts._id}`,
+      {},
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    const updatedPost = await axios.get(
+      `http://localhost:3001/api/blog/${posts._id}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    setPosts(updatedPost.data);
   };
   return (
     <div className="flex flex-col gap-3 px-5 pt-5 pb-4 border-b-2 border-gray-200 md:px-5">
@@ -133,11 +166,11 @@ const Post = ({ posts }) => {
         {/* Div for like and comment */}
         <div className="flex gap-10">
           {/* Div for like */}
-          <div onClick={() => setLike(!like)} className="flex gap-4">
+          <div className="flex gap-4">
             {like ? (
-              <FaHeart color="red" size={20} />
+              <FaHeart onClick={handleDisLike} color="red" size={20} />
             ) : (
-              <FaRegHeart size={20} />
+              <FaRegHeart onClick={handleLike} size={20} />
             )}
             {like ? (
               <p className="font-semibold text-primary">{posts.likes.length}</p>
