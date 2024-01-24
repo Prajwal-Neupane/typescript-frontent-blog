@@ -16,6 +16,8 @@ const Post = ({ post }) => {
   const [posts, setPosts] = useState(post);
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [like, setLike] = useState(false);
+  const [comments, setComments] = useState(posts.comments);
+  const [showComments, setShowComments] = useState(false);
   const { decodedToken, isExpired } = useJwt(accessToken);
 
   const popUpRef = useRef(null);
@@ -87,6 +89,7 @@ const Post = ({ post }) => {
     );
     setPosts(updatedPost.data);
   };
+
   return (
     <div className="flex flex-col gap-3 px-5 pt-5 pb-4 border-b-2 border-gray-200 md:px-5">
       <div className="flex justify-between">
@@ -180,8 +183,20 @@ const Post = ({ post }) => {
           </div>
           {/* Div for comment */}
           <div className="flex gap-4">
-            <GoCommentDiscussion size={20} />
+            <GoCommentDiscussion
+              onClick={() => setShowComments(!showComments)}
+              size={20}
+            />
             <p className="font-semibold ">{posts.comments.length}</p>
+          </div>
+          <div className="inline-block">
+            {showComments &&
+              comments.map((comment) => {
+                <div key={comments._id}>
+                  {" "}
+                  <h1>{comment.comment}</h1>{" "}
+                </div>;
+              })}
           </div>
         </div>
         {/* div for share */}
