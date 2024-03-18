@@ -9,6 +9,7 @@ const Profile = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [data, setData] = useState();
   const [posts, setPosts] = useState();
+
   useEffect(() => {
     const fetchUserData = async () => {
       const response = await axios.get("http://localhost:3001/api/user/me", {
@@ -76,8 +77,8 @@ const Profile = () => {
             <div className="w-[100%] mt-5">
               <h1 className="text-2xl font-bold text-center">Posts</h1>
               <div className="flex-col w-full md:w-[80%] mx-auto">
-                {posts && posts.length > 1 ? (
-                  posts.map((post) => <Post key={post._id} posts={post} />)
+                {posts && posts.length > 0 ? (
+                  posts.map((post) => <Post key={post._id} post={post} />)
                 ) : (
                   <div className="mt-8">
                     <h1 className="text-xl font-semibold text-center">

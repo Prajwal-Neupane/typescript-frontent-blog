@@ -37,6 +37,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       toast.error("Error occured");
+      // toast.error(error.response.data.message);
     }
   };
   const [viewPassword, setViewPassword] = useState(false);

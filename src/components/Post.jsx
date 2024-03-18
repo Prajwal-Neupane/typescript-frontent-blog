@@ -11,17 +11,29 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useJwt } from "react-jwt";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Post = ({ post }) => {
   const [posts, setPosts] = useState(post);
+  const navigate = useNavigate();
   const accessToken = useSelector((state) => state.auth.accessToken);
   const [like, setLike] = useState(false);
-  const [comments, setComments] = useState(posts.comments);
+  const [comments, setComments] = useState(posts && posts.comments);
   const [showComments, setShowComments] = useState(false);
   const { decodedToken, isExpired } = useJwt(accessToken);
 
   const popUpRef = useRef(null);
   const [popUp, setPopUp] = useState(false);
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3001/api/blog/${id}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    toast.dismiss();
+    toast.success("Post deleted");
+    navigate("/profile");
+    window.location.reload();
+  };
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (popUpRef.current && !popUpRef.current.contains(e.target)) {
@@ -39,12 +51,13 @@ const Post = ({ post }) => {
       setLike(posts.likes.includes(decodedToken.id));
     }
   }, [decodedToken, posts.likes]);
-  const dateObject = new Date(posts.createdAt);
+  const dateObject = new Date(posts && posts.createdAt);
   const options = {
     month: "short",
     day: "numeric",
     year: "numeric",
   };
+
   const formattedDate = dateObject.toLocaleString("en-US", options);
   const handleDeleteConfirmation = (id) => {
     toast((t) => (
@@ -59,10 +72,7 @@ const Post = ({ post }) => {
       </span>
     ));
   };
-  const handleDelete = (id) => {
-    console.log(id);
-    toast.dismiss();
-  };
+
   const handleLike = async () => {
     setLike(() => true);
     await axios.put(
@@ -106,7 +116,7 @@ const Post = ({ post }) => {
               </p>
             </div>
           </div> */}
-          <Author createdAt={formattedDate} author={posts.author} />
+          <Author createdAt={formattedDate} author={posts && posts.author} />
         </div>
 
         <div className="relative">
@@ -136,7 +146,7 @@ const Post = ({ post }) => {
       {/* Div for Texts */}
       <div>
         <h1 className="text-[1.2rem] font-['Roboto'] text-justify leading-6">
-          {posts.content}
+          {posts && posts.content}
         </h1>
       </div>
 
@@ -176,9 +186,11 @@ const Post = ({ post }) => {
               <FaRegHeart onClick={handleLike} size={20} />
             )}
             {like ? (
-              <p className="font-semibold text-primary">{posts.likes.length}</p>
+              <p className="font-semibold text-primary">
+                {posts && posts.likes.length}
+              </p>
             ) : (
-              <p className="font-semibold">{posts.likes.length}</p>
+              <p className="font-semibold">{posts && posts.likes.length}</p>
             )}
           </div>
           {/* Div for comment */}
@@ -187,15 +199,17 @@ const Post = ({ post }) => {
               onClick={() => setShowComments(!showComments)}
               size={20}
             />
-            <p className="font-semibold ">{posts.comments.length}</p>
+            <p className="font-semibold ">{posts && posts.comments.length}</p>
           </div>
           <div className="inline-block">
             {showComments &&
               comments.map((comment) => {
-                <div key={comments._id}>
-                  {" "}
-                  <h1>{comment.comment}</h1>{" "}
-                </div>;
+                return (
+                  <div key={comments._id}>
+                    {" "}
+                    <h1>{comment.comment}</h1>{" "}
+                  </div>
+                );
               })}
           </div>
         </div>
